@@ -1,6 +1,3 @@
-from src.util import get_item_info
-
-
 class Knapsack:
     def __init__(self, capacity):
         self.capacity = capacity
@@ -11,7 +8,7 @@ class Knapsack:
         total_weight = 0
 
         for item in self.content:
-            value, weight = get_item_info(item, objects_dict)
+            value, weight = objects_dict[item][0], objects_dict[item][1]
             total_value += value
             total_weight += weight
 
@@ -19,7 +16,7 @@ class Knapsack:
 
     def print_content(self, objects_dict) -> None:
         for item in self.content:
-            value, weight = get_item_info(item, objects_dict)
+            value, weight = objects_dict[item][0], objects_dict[item][1]
             print(item + ' ' + str(value) + ' ' + str(weight), end='\n')
 
         total_value, total_weight = self.get_value_and_weight(objects_dict)
@@ -36,7 +33,7 @@ def solve_knapsack_greedy(knapsack, objects_dict) -> Knapsack:
         if current_sack_capacity == knapsack.capacity:
             return knapsack
 
-        _, weight = get_item_info(item, objects_dict)
+        weight = objects_dict[item][1]
 
         if weight + current_sack_capacity <= knapsack.capacity:
             knapsack.content.append(item)
