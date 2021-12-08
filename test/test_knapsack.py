@@ -1,8 +1,8 @@
 import json
 
 import pytest
-from Knapsack import (
-    Knapsack, solve_knapsack_greedy, solve_knapsack_best, solve_knapsack_optimal
+from src.Knapsack import (
+    Knapsack, solve_knapsack_greedy
 )
 
 
@@ -29,7 +29,7 @@ def get_small_objects_dict(capacity=60):
 
 
 def get_medium_objects_dict():
-    with open("stuff_dd.json") as file:
+    with open("../ressource/stuff_dd.json") as file:
         data = json.load(file)
     return data["stuff_dd"]
 
