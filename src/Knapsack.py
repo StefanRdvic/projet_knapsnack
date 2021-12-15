@@ -3,6 +3,11 @@ class Knapsack:
         self.capacity = capacity
         self.content = []
 
+    def copy(self):
+        knapsack_copy = Knapsack(self.capacity)
+        knapsack_copy.content.extend(self.content)
+        return knapsack_copy
+
     def get_value_and_weight(self, objects_dict) -> (int, int):
         total_value = 0
         total_weight = 0
@@ -26,7 +31,6 @@ class Knapsack:
 
 def solve_knapsack_greedy(knapsack, objects_dict) -> Knapsack:
     sorted_objects_dict = dict(sorted(objects_dict.items(), key=lambda i: (i[1][0] / i[1][1]), reverse=True))
-
     current_sack_capacity = 0
 
     for item in sorted_objects_dict.keys():
@@ -46,5 +50,9 @@ def solve_knapsack_best(knapsack, objects_dict) -> Knapsack:
     pass
 
 
-def solve_knapsack_optimal(knapsack, objects_dict) -> Knapsack:
+def solve_knapsack_optimal(knapsack, objects_dict):
+    pass
+
+
+def recursive_brute_force(knapsack, objects_dict):
     pass
