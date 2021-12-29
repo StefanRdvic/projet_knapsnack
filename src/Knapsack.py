@@ -25,10 +25,15 @@ class Knapsack:
             print(item + ' ' + str(value) + ' ' + str(weight), end='\n')
 
         total_value, total_weight = self.get_value_and_weight(objects_dict)
-        print('Le sac a ' + str(len(self.content)) + ' objets, pour une valeur de ' + str(total_value) +
-              ' et un poids de ' + str(total_weight) + '/' + str(self.capacity), end='\n')
+        print(
+            "Le sac a %d objets, pour une valeur de %d et un poids de %d/%d"
+            % (len(self.content), total_value, total_weight, self.capacity)
+        )
 
 
+# -------------------------------------------------------------------------
+# Greedy solution
+# -------------------------------------------------------------------------
 def solve_knapsack_greedy(knapsack, objects_dict) -> Knapsack:
     sorted_objects_dict = dict(sorted(objects_dict.items(), key=lambda i: (i[1][0] / i[1][1]), reverse=True))
     current_sack_capacity = 0
@@ -46,13 +51,48 @@ def solve_knapsack_greedy(knapsack, objects_dict) -> Knapsack:
     return knapsack
 
 
+# -------------------------------------------------------------------------
+# best solution
+# -------------------------------------------------------------------------
 def solve_knapsack_best(knapsack, objects_dict) -> Knapsack:
     pass
 
 
+# -------------------------------------------------------------------------
+# Optimal solution
+# -------------------------------------------------------------------------
 def solve_knapsack_optimal(knapsack, objects_dict):
-    pass
+    keys = list(objects_dict.keys())
+    return get_max_value(knapsack, objects_dict, keys, knapsack.capacity, 0)
 
 
-def recursive_brute_force(knapsack, objects_dict):
-    pass
+def get_best(knapsack1, knapsack2, objects_dict):
+    sack1_value, sack1_weight = knapsack1.get_value_and_weight(objects_dict)
+    sack2_value, sack2_weight = knapsack2.get_value_and_weight(objects_dict)
+
+    if sack1_value == sack2_value:
+        return knapsack1 if sack1_weight < sack2_weight else knapsack2
+
+    return knapsack1 if sack1_value > sack2_value else knapsack2
+
+
+def get_max_value(knapsack, objects_dict, keys, current_capacity, current_index):
+    if current_index == len(keys) or current_capacity <= 0:
+        return knapsack
+
+    weight = objects_dict[keys[current_index]][1]
+    knapsack_copy = knapsack.copy()
+
+    if weight <= current_capacity:
+        knapsack.content.append(keys[current_index])
+
+        knapsack_include = get_max_value(
+            knapsack, objects_dict, keys, current_capacity - weight, current_index + 1
+        )
+
+        knapsack_exclude = get_max_value(
+            knapsack_copy, objects_dict, keys, current_capacity, current_index + 1
+        )
+        return get_best(knapsack_include, knapsack_exclude, objects_dict)
+
+    return get_max_value(knapsack_copy, objects_dict, keys, current_capacity, current_index + 1)
