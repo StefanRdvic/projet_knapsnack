@@ -5,13 +5,13 @@
 
 ## The *greedy* solution 
 
-Our first solution works by __sorting__ every items of our dictionary using the __value / weight__ ratio. Starting from the best ratio each items are added until there is no __space left__ in the knapsack. Finally, if we include the sorting process this solution land a very low time complexity of O(n*log(n)) and a constant space complexity. But keep in mind that this solution will not provide the best knapsack frequently.
+Our first solution works by __sorting__ every items of our dictionary using the __value / weight__ ratio. Starting from the best ratio each items are added until there is no __space left__ in the knapsack. Finally, if we include the sorting process this solution land a very low time complexity of `O(n*log(n))` and a constant space complexity. But keep in mind that this solution will not provide the best knapsack frequently.
 
 ## The *best* solution
-Our second solution will use the concept of __*dynamic programming*__ to a next level by adding __*recursion*__  and __*memoization*__. Its purpose is to calculate the knapsack value at a current items and capacity remaining by avoiding repetition and over computation since our number of items is fixed. This technique checks if a knapsack has __already been calculated before processing__ the recursive part, if not the process will go on and __store the result__ at the end. This algorithm runs on a time complexity of __O(n*W)__ (number of items * weight) and the space complexity is also  __O(n*W)__ since we're storing calculated value.    
+Our second solution will use the concept of __*dynamic programming*__ to a next level by adding __*recursion*__  and __*memoization*__. Its purpose is to calculate the knapsack value at a current items and capacity remaining by avoiding repetition and over computation since our number of items is fixed. This technique checks if a knapsack has __already been calculated before processing__ the recursive part, if not the process will go on and __store the result__ at the end. This algorithm runs on a time complexity of `O(n*W)` (number of items * weight) and the space complexity is also  `O(n*W)` since we're storing calculated value.    
 
 ## The *optimal* solution
-Our third and final solution can also be called the brainless one. Its main qualification is to calculate and compare every possible knapsack combination to get the best one. Althought, This brute-force technique will guarantee the best possible solution for the Knapsack 0/1 problem its drawback will be its exponential time complexity of O(2^n). Checking each combination takes time and consider using it on a low number of items.
+Our third and final solution can also be called the brainless one. Its main qualification is to calculate and compare every possible knapsack combination to get the best one. Althought, This brute-force technique will guarantee the best possible solution for the Knapsack 0/1 problem its drawback will be its exponential time complexity of `O(2^n)` and a constant time complexity. ⚠ Checking each combination takes time and consider using it on a low number of items.
 
 ## Sources
 
